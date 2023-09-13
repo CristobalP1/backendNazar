@@ -1,7 +1,8 @@
+import 'dotenv/config';
 import express from "express";
 import cors from 'cors';
 import { pool } from "./db.js";
-import { PORT } from "./config.js";
+import { PORT, USER_API, USER_PASS } from "./config.js";
 import basicAuth from 'express-basic-auth';
 
 const app = express();
@@ -10,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(basicAuth({
-  users:{'admin':'Cps@246'},
+  users:{[USER_API]: USER_PASS},
   challenge:true,
   unauthorizedResponse:'Access Denied'
 }));
